@@ -66,6 +66,26 @@ export function BasicTabsExample() {
   );
 }`;
 
+const basicTabsSmallCode = `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+export function BasicTabsSmallExample() {
+  return (
+    <Tabs type="fixed" variant="basic" size="sm" defaultValue="overview">
+      <TabsList>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="analytics">Analytics</TabsTrigger>
+        <TabsTrigger value="reports">Reports</TabsTrigger>
+        <TabsTrigger value="settings">Settings</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="overview">Overview 콘텐츠</TabsContent>
+      <TabsContent value="analytics">Analytics 콘텐츠</TabsContent>
+      <TabsContent value="reports">Reports 콘텐츠</TabsContent>
+      <TabsContent value="settings">Settings 콘텐츠</TabsContent>
+    </Tabs>
+  );
+}`;
+
 const iconTabsCode = `import { Bell, LayoutGrid, Truck } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -284,6 +304,39 @@ export default function TabsDocsPage() {
           </Tabs>
         </div>
         <CodeSnippet title="Basic Tabs 예시" code={basicTabsCode} copyable />
+
+        <h3 className="text-title-sm text-[color:var(--gray-900)]">Basic Tabs / Small</h3>
+        <div className="rounded-xl border border-border bg-muted-30 p-6">
+          <Tabs defaultValue="overview" type="fixed" variant="basic" size="sm">
+            <TabsList>
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="analytics">Analytics</TabsTrigger>
+              <TabsTrigger value="reports">Reports</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
+            </TabsList>
+            <TabsContent value="overview">
+              <div className="rounded-lg border border-border bg-background p-6 text-body-sm text-muted-foreground">
+                Overview 콘텐츠
+              </div>
+            </TabsContent>
+            <TabsContent value="analytics">
+              <div className="rounded-lg border border-border bg-background p-6 text-body-sm text-muted-foreground">
+                Analytics 콘텐츠
+              </div>
+            </TabsContent>
+            <TabsContent value="reports">
+              <div className="rounded-lg border border-border bg-background p-6 text-body-sm text-muted-foreground">
+                Reports 콘텐츠
+              </div>
+            </TabsContent>
+            <TabsContent value="settings">
+              <div className="rounded-lg border border-border bg-background p-6 text-body-sm text-muted-foreground">
+                Settings 콘텐츠
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+        <CodeSnippet title="Basic Tabs / Small 예시" code={basicTabsSmallCode} copyable />
       </section>
 
       <section className="not-prose space-y-6">

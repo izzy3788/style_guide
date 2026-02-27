@@ -294,7 +294,13 @@ const DateRangePicker = React.forwardRef<HTMLButtonElement, DateRangePickerProps
               <span
                 className={cn(
                   "block truncate pr-2",
-                  fromDate ? "text-foreground" : "text-[color:var(--gray-500)]",
+                  disabled
+                    ? "text-[color:var(--gray-400)]"
+                    : readOnly
+                      ? "text-[color:var(--gray-700)]"
+                      : fromDate
+                        ? "text-foreground"
+                        : "text-[color:var(--gray-500)]",
                 )}
               >
                 {triggerLabel}

@@ -27,6 +27,7 @@ export const docsNav: NavSection[] = [
       { href: "/components/badge", label: "Badge" },
       { href: "/components/breadcrumb", label: "Breadcrumb" },
       { href: "/components/button", label: "Button" },
+      { href: "/components/button-group", label: "Button Group" },
       { href: "/components/card", label: "Card" },
       { href: "/components/checkbox", label: "Checkbox" },
       { href: "/components/combobox", label: "Combobox" },

@@ -90,7 +90,7 @@
   --gray-300: #d9dee5;
   --gray-400: #bfc6d0;
   --gray-500: #98a2b3;
-  --gray-600: #7a8699;
+  --gray-600: #65758b;
   --gray-700: #5e6a7d;
   --gray-800: #4a5565;
   --gray-900: #3a4150;
@@ -466,7 +466,7 @@ body {
 .text-title-xs {
   font-size: 16px;
   line-height: 150%;
-  font-weight: 600;
+  font-weight: 500;
 }
 .text-body-lg {
   font-size: 18px;

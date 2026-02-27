@@ -65,7 +65,7 @@ const typeScale = [
     token: "text-title-xs",
     mobile: "16px",
     desktop: "16px",
-    weight: "600",
+    weight: "500",
     lineHeight: "150%",
     tracking: "-",
   },

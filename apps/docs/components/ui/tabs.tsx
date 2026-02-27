@@ -9,6 +9,7 @@ type TabsContextValue = {
   baseId: string;
   type: "fixed" | "scrollable";
   variant: "line" | "basic";
+  size: "sm" | "md";
   value: string;
   setValue: (value: string) => void;
 };
@@ -32,6 +33,7 @@ export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
   onValueChange?: (value: string) => void;
   type?: "fixed" | "scrollable";
   variant?: "line" | "basic";
+  size?: "sm" | "md";
   value?: string;
 }
 
@@ -41,6 +43,7 @@ export function Tabs({
   onValueChange,
   type = "fixed",
   variant = "line",
+  size = "md",
   value,
   ...props
 }: TabsProps) {
@@ -65,6 +68,7 @@ export function Tabs({
         baseId: generatedId,
         type,
         variant,
+        size,
         value: selectedValue,
         setValue,
       }}
@@ -80,11 +84,28 @@ const tabsListWrapperVariants = cva(
     variants: {
       variant: {
         line: "border-b border-border bg-background",
-        basic: "rounded-lg bg-muted p-1",
+        basic: "inline-flex w-fit bg-[color:var(--gray-200)]",
+      },
+      size: {
+        sm: "",
+        md: "",
       },
     },
+    compoundVariants: [
+      {
+        variant: "basic",
+        size: "sm",
+        className: "rounded-md p-1",
+      },
+      {
+        variant: "basic",
+        size: "md",
+        className: "rounded-lg p-1",
+      },
+    ],
     defaultVariants: {
       variant: "line",
+      size: "md",
     },
   }
 );
@@ -108,10 +129,17 @@ export interface TabsListProps
   tabType?: "fixed" | "scrollable";
 }
 
-export function TabsList({ className, tabType, children, ...props }: TabsListProps) {
+export function TabsList({
+  className,
+  tabType,
+  children,
+  size,
+  ...props
+}: TabsListProps) {
   const context = React.useContext(TabsContext);
   const resolvedType = tabType ?? context?.type ?? "fixed";
   const resolvedVariant = context?.variant ?? "line";
+  const resolvedSize = size ?? context?.size ?? "md";
   const viewportRef = React.useRef<HTMLDivElement>(null);
   const [showLeftFade, setShowLeftFade] = React.useState(false);
   const [showRightFade, setShowRightFade] = React.useState(false);
@@ -172,7 +200,7 @@ export function TabsList({ className, tabType, children, ...props }: TabsListPro
     <div
       className={cn(
         "relative",
-        tabsListWrapperVariants({ variant: resolvedVariant }),
+        tabsListWrapperVariants({ variant: resolvedVariant, size: resolvedSize }),
         className
       )}
     >
@@ -296,23 +324,52 @@ export function TabsList({ className, tabType, children, ...props }: TabsListPro
 }
 
 const tabsTriggerVariants = cva(
-  "relative inline-flex items-center justify-center gap-2 px-4 text-body-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:text-[color:var(--gray-400)]",
+  "relative inline-flex items-center justify-center gap-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:text-[color:var(--gray-400)]",
   {
     variants: {
       variant: {
-        line: "h-12 border-b-2",
-        basic: "h-10 rounded-md border border-transparent",
+        line: "border-b-2",
+        basic: "border border-transparent",
+      },
+      size: {
+        sm: "px-2 text-[14px] leading-[150%]",
+        md: "px-4 text-body-sm",
       },
       active: {
         false: "text-muted-foreground enabled:hover:text-foreground",
         true: "",
       },
       tabType: {
-        fixed: "min-w-0 flex-1",
+        fixed: "min-w-0",
         scrollable: "shrink-0",
       },
     },
     compoundVariants: [
+      {
+        variant: "line",
+        tabType: "fixed",
+        className: "flex-1",
+      },
+      {
+        variant: "line",
+        size: "sm",
+        className: "h-10",
+      },
+      {
+        variant: "line",
+        size: "md",
+        className: "h-12",
+      },
+      {
+        variant: "basic",
+        size: "sm",
+        className: "h-8 rounded-md",
+      },
+      {
+        variant: "basic",
+        size: "md",
+        className: "h-10 rounded-md",
+      },
       {
         variant: "line",
         active: false,
@@ -327,11 +384,13 @@ const tabsTriggerVariants = cva(
       {
         variant: "basic",
         active: true,
-        className: "border-border bg-background text-foreground shadow-sm",
+        className:
+          "bg-background text-foreground shadow-[0_2px_6px_rgba(15,23,42,0.12)]",
       },
     ],
     defaultVariants: {
       variant: "line",
+      size: "md",
       active: false,
       tabType: "fixed",
     },
@@ -347,6 +406,7 @@ export interface TabsTriggerProps
 export function TabsTrigger({
   className,
   tabType,
+  size,
   value,
   onClick,
   ...props
@@ -357,6 +417,7 @@ export function TabsTrigger({
   const selected = context.value === value;
   const resolvedType = tabType ?? context.type;
   const resolvedVariant = context.variant;
+  const resolvedSize = size ?? context.size;
 
   return (
     <button
@@ -367,6 +428,7 @@ export function TabsTrigger({
           active: selected,
           tabType: resolvedType,
           variant: resolvedVariant,
+          size: resolvedSize,
         }),
         className
       )}

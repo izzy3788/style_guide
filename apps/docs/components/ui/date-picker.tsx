@@ -251,7 +251,13 @@ const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
               <span
                 className={cn(
                   "block truncate pr-2",
-                  selectedDate ? "text-foreground" : "text-[color:var(--gray-500)]"
+                  disabled
+                    ? "text-[color:var(--gray-400)]"
+                    : readOnly
+                      ? "text-[color:var(--gray-700)]"
+                      : selectedDate
+                        ? "text-foreground"
+                        : "text-[color:var(--gray-500)]"
                 )}
               >
                 {selectedDate ? formatLabel(selectedDate, locale) : placeholder}

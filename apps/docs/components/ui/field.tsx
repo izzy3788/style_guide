@@ -95,12 +95,12 @@ const FieldRoot = React.forwardRef<HTMLDivElement, FieldRootProps>(
 );
 FieldRoot.displayName = "FieldRoot";
 
-const fieldLabelVariants = cva("text-foreground", {
+const fieldLabelVariants = cva("pl-0.5 text-foreground", {
   variants: {
     size: {
-      sm: "text-caption-lg mb-2",
-      md: "text-body-sm mb-2",
-      lg: "text-body-sm mb-3",
+      sm: "text-caption-lg mb-1",
+      md: "text-body-sm mb-1",
+      lg: "text-body-sm mb-1",
     },
   },
   defaultVariants: {
@@ -183,7 +183,7 @@ const FieldControl = React.forwardRef<HTMLElement, FieldControlProps>(
 );
 FieldControl.displayName = "FieldControl";
 
-const fieldHelperVariants = cva("text-[color:var(--gray-600)] text-caption", {
+const fieldHelperVariants = cva("pl-0.5 text-[color:var(--gray-600)] text-caption", {
   variants: {
     size: {
       sm: "mt-1",

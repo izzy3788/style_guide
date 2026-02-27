@@ -164,7 +164,7 @@ export default function PaginationDocsPage() {
       <section className="not-prose space-y-6">
         <h2 className="text-title-md text-[color:var(--gray-900)]">기본 사용</h2>
         <div className="rounded-xl border border-border bg-muted-30 p-6">
-          <div className="bg-background px-4 py-3">
+          <div className="px-4 py-3">
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
@@ -197,7 +197,7 @@ export default function PaginationDocsPage() {
           페이지 수가 많을 때는 중간 번호를 축약 기호로 줄여 가독성을 유지합니다.
         </p>
         <div className="rounded-xl border border-border bg-muted-30 p-6">
-          <div className="bg-background px-4 py-3">
+          <div className="px-4 py-3">
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
@@ -237,7 +237,7 @@ export default function PaginationDocsPage() {
           사용할 수 있습니다. 본 예시는 PC 보조 인디케이터 기준 크기입니다.
         </p>
         <div className="rounded-xl border border-border bg-muted-30 p-6">
-          <div className="bg-background px-4 py-3">
+          <div className="px-4 py-3">
             <Pagination>
               <PaginationContent className="justify-center gap-0">
                 <PaginationItem>
@@ -273,7 +273,7 @@ export default function PaginationDocsPage() {
           좁은 영역에서는 이전/다음 버튼과 현재 페이지 정보만 표시해 사용합니다.
         </p>
         <div className="rounded-xl border border-border bg-muted-30 p-6">
-          <div className="bg-background px-4 py-3">
+          <div className="px-4 py-3">
             <Pagination>
               <PaginationContent className="justify-center gap-2">
                 <PaginationItem>

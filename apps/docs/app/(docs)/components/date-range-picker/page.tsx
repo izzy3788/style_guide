@@ -72,7 +72,7 @@ const stateCode = `import { DateRangePicker } from "@/components/ui/date-range-p
 
 export function DateRangePickerStates() {
   return (
-    <div className="space-y-3">
+    <div className="grid grid-cols-1 gap-3">
       <DateRangePicker
         defaultValue={{ from: "2026-02-24", to: "2026-02-28" }}
         readOnly
@@ -171,7 +171,7 @@ export default function DateRangePickerDocsPage() {
           비활성화합니다.
         </p>
         <div className="mx-auto max-w-lg rounded-xl border border-border bg-muted-30 p-6">
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 gap-3">
             <DateRangePicker defaultValue={{ from: "2026-02-24", to: "2026-02-28" }} readOnly />
             <DateRangePicker defaultValue={{ from: "2026-02-24", to: "2026-02-28" }} disabled />
           </div>

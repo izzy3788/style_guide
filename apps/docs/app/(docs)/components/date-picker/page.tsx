@@ -63,7 +63,7 @@ const stateCode = `import { DatePicker } from "@/components/ui/date-picker";
 
 export function DatePickerStates() {
   return (
-    <div className="space-y-3">
+    <div className="grid grid-cols-1 gap-3">
       <DatePicker defaultValue="2026-02-24" readOnly />
       <DatePicker defaultValue="2026-02-24" disabled />
     </div>
@@ -127,7 +127,7 @@ export default function DatePickerDocsPage() {
           비활성화합니다.
         </p>
         <div className="mx-auto max-w-lg rounded-xl border border-border bg-muted-30 p-6">
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 gap-3">
             <DatePicker defaultValue="2026-02-24" readOnly />
             <DatePicker defaultValue="2026-02-24" disabled />
           </div>

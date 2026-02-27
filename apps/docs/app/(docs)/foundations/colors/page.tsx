@@ -37,7 +37,7 @@ const grayScale = [
   { name: "Gray 300", token: "gray-300", value: "#D9DEE5" },
   { name: "Gray 400", token: "gray-400", value: "#BFC6D0" },
   { name: "Gray 500", token: "gray-500", value: "#98A2B3" },
-  { name: "Gray 600", token: "gray-600", value: "#7A8699" },
+  { name: "Gray 600", token: "gray-600", value: "#65758B" },
   { name: "Gray 700", token: "gray-700", value: "#5E6A7D" },
   { name: "Gray 800", token: "gray-800", value: "#4A5565" },
   { name: "Gray 900", token: "gray-900", value: "#3A4150" },
