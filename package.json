@@ -1,0 +1,17 @@
+{
+  "name": "style-guide",
+  "private": true,
+  "packageManager": "pnpm@10.29.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -C apps/docs dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint"
+  },
+  "dependencies": {
+    "tailwindcss-animate": "^1.0.7"
+  }
+}
