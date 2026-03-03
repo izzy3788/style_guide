@@ -52,8 +52,8 @@ export default function DocsLayout({
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
         <SheetContent side="left" desktopWidth={320} className="lg:hidden">
           <div className="flex h-full flex-col">
-            <div className="border-b border-border px-4 py-4">
-              <div className="flex items-center justify-between gap-2">
+            <div className="border-b border-border">
+              <div className="flex h-[60px] items-center justify-between gap-2 px-4">
                 <div className="text-body-sm font-semibold text-foreground">Style Guide</div>
                 <SheetClose asChild>
                   <button
@@ -65,7 +65,7 @@ export default function DocsLayout({
                   </button>
                 </SheetClose>
               </div>
-              <div className="mt-2">
+              <div className="px-4 pb-4">
                 <Input
                   aria-label="문서 검색"
                   value={mobileQuery}
@@ -77,7 +77,7 @@ export default function DocsLayout({
               </div>
             </div>
             <div className="flex-1 overflow-y-auto px-4 py-3 [scrollbar-gutter:auto]">
-              <DocsNav query={mobileQuery} />
+              <DocsNav query={mobileQuery} onItemSelect={() => setMobileOpen(false)} />
             </div>
             <div className="border-t border-border p-3">
               <div className="flex items-center gap-3 rounded-lg border border-border bg-[color:var(--gray-50)] px-3 py-2">
@@ -104,11 +104,11 @@ export default function DocsLayout({
 
         <main
           className={cn(
-            "flex min-h-screen min-w-0 flex-1 pt-[88px] transition-[padding] duration-200 lg:pt-0",
+            "flex min-h-screen min-w-0 flex-1 pt-[72px] transition-[padding] duration-200 lg:pt-0",
             isCollapsed ? "lg:pl-[136px]" : "lg:pl-[304px]"
           )}
         >
-          <div className="mx-auto w-full max-w-[920px] px-8 py-10">
+          <div className="mx-auto w-full max-w-[920px] px-8 pb-10 pt-6 md:pt-10">
             <article className="docs-content prose prose-neutral dark:prose-invert prose-a:no-underline max-w-none space-y-12">
               {children}
             </article>

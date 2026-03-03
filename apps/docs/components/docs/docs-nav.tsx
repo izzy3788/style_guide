@@ -1,6 +1,6 @@
 "use client";
 
-import { Blocks, ChevronDown, LayoutGrid, NotebookText } from "lucide-react";
+import { ChevronDown, Palette, Ruler, Type } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -20,11 +20,13 @@ function NavSectionList({
   pathname,
   open,
   onToggle,
+  onItemSelect,
 }: {
   section: NavSection;
   pathname: string;
   open: boolean;
   onToggle: () => void;
+  onItemSelect?: () => void;
 }) {
   return (
     <SidebarGroup>
@@ -54,6 +56,7 @@ function NavSectionList({
                   <Link
                     href={item.href}
                     aria-current={isActive ? "page" : undefined}
+                    onClick={onItemSelect}
                     className={cn(
                       "no-underline text-body-sm text-foreground-80",
                       "hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
@@ -71,26 +74,31 @@ function NavSectionList({
   );
 }
 
-const collapsedSectionIcons = {
-  FOUNDATIONS: LayoutGrid,
-  COMPONENTS: Blocks,
-  GUIDELINES: NotebookText,
-} as const;
+const collapsedFoundationItems = [
+  { href: "/foundations/colors", label: "색상", Icon: Palette },
+  { href: "/foundations/typography", label: "타이포그래피", Icon: Type },
+  { href: "/foundations/spacing", label: "간격", Icon: Ruler },
+] as const;
 
-function CollapsedNav({ pathname }: { pathname: string }) {
+function CollapsedNav({
+  pathname,
+  onItemSelect,
+}: {
+  pathname: string;
+  onItemSelect?: () => void;
+}) {
   return (
     <nav aria-label="문서 사이드 내비게이션" className="w-full space-y-2">
-      {docsNav.map((section) => {
-        const firstItem = section.items[0];
-        const Icon = collapsedSectionIcons[section.title as keyof typeof collapsedSectionIcons] ?? LayoutGrid;
-        const isActive = section.items.some((item) => pathname === item.href);
+      {collapsedFoundationItems.map((item) => {
+        const isActive = pathname === item.href;
 
         return (
-          <div key={section.title} className="flex w-full justify-center">
+          <div key={item.href} className="flex w-full justify-center">
             <Link
-              href={firstItem.href}
-              title={section.title}
-              aria-label={section.title}
+              href={item.href}
+              title={item.label}
+              aria-label={item.label}
+              onClick={onItemSelect}
               className={cn(
                 "flex h-10 w-10 items-center justify-center rounded-md transition-colors",
                 isActive
@@ -98,7 +106,7 @@ function CollapsedNav({ pathname }: { pathname: string }) {
                   : "text-foreground-80 hover:bg-muted-60 hover:text-foreground"
               )}
             >
-              <Icon className="h-4 w-4" />
+              <item.Icon className="h-4 w-4" />
             </Link>
           </div>
         );
@@ -110,9 +118,11 @@ function CollapsedNav({ pathname }: { pathname: string }) {
 export default function DocsNav({
   collapsed = false,
   query = "",
+  onItemSelect,
 }: {
   collapsed?: boolean;
   query?: string;
+  onItemSelect?: () => void;
 }) {
   const pathname = usePathname();
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(() => {
@@ -137,7 +147,7 @@ export default function DocsNav({
     : docsNav;
 
   if (collapsed) {
-    return <CollapsedNav pathname={pathname} />;
+    return <CollapsedNav pathname={pathname} onItemSelect={onItemSelect} />;
   }
 
   return (
@@ -159,6 +169,7 @@ export default function DocsNav({
                 [section.title]: !prev[section.title],
               }))
             }
+            onItemSelect={onItemSelect}
           />
         ))
       ) : (
