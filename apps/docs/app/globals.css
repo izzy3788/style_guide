@@ -469,12 +469,12 @@ body {
   font-weight: 500;
 }
 .text-body-lg {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 140%;
   font-weight: 500;
 }
 .text-body-md {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 150%;
   font-weight: 400;
 }
@@ -505,6 +505,15 @@ body {
   }
   .text-title-sm {
     font-size: 20px;
+  }
+  .text-body-lg {
+    font-size: 18px;
+  }
+  .text-body-md {
+    font-size: 16px;
+  }
+  .text-body-sm {
+    font-size: 14px;
   }
 }
 

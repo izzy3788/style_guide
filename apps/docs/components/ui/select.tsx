@@ -23,7 +23,7 @@ const selectTriggerVariants = cva(
 );
 
 const selectLayerVariants = cva(
-  "absolute left-0 top-[calc(100%+8px)] z-50 w-full overflow-hidden rounded-lg border border-[color:var(--gray-200)] bg-[color:var(--gray-00)] py-1 shadow-md",
+  "absolute left-0 top-[calc(100%+8px)] z-50 w-full overflow-hidden rounded-lg border border-[color:var(--gray-200)] bg-[color:var(--gray-00)] py-0 shadow-md",
   {
     variants: {
       size: {

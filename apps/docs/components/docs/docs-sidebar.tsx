@@ -14,16 +14,18 @@ import {
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
-export const DOCS_SIDEBAR_COLLAPSE_ENABLED = false;
+export const DOCS_SIDEBAR_COLLAPSE_ENABLED = true;
 
 export default function DocsSidebar({
   collapsed,
   onToggle,
   enableCollapse = DOCS_SIDEBAR_COLLAPSE_ENABLED,
+  className,
 }: {
   collapsed: boolean;
   onToggle: () => void;
   enableCollapse?: boolean;
+  className?: string;
 }) {
   const isCollapsed = enableCollapse ? collapsed : false;
   const [query, setQuery] = useState("");
@@ -32,7 +34,8 @@ export default function DocsSidebar({
     <Sidebar
       className={cn(
         "fixed left-0 top-0 h-screen border-r border-border bg-background transition-[width] duration-200",
-        isCollapsed ? "w-[72px]" : "w-[240px]"
+        isCollapsed ? "w-[72px]" : "w-[240px]",
+        className
       )}
     >
       <SidebarHeader

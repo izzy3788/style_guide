@@ -72,7 +72,7 @@ const typeScale = [
   {
     name: "Body 1",
     token: "text-body-lg",
-    mobile: "18px",
+    mobile: "16px",
     desktop: "18px",
     weight: "500",
     lineHeight: "140%",
@@ -81,7 +81,7 @@ const typeScale = [
   {
     name: "Body 2",
     token: "text-body-md",
-    mobile: "16px",
+    mobile: "15px",
     desktop: "16px",
     weight: "400",
     lineHeight: "150%",

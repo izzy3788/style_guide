@@ -75,7 +75,6 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -102,7 +101,6 @@ export function DropdownMenuCheckboxes() {
         >
           액티비티 바
         </DropdownMenuCheckboxItem>
-        <DropdownMenuSeparator />
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -186,7 +184,6 @@ export default function DropdownMenuDocsPage() {
               >
                 액티비티 바
               </DropdownMenuCheckboxItem>
-              <DropdownMenuSeparator />
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
