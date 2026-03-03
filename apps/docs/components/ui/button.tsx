@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border-0 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border-0 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -43,17 +43,50 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  loading?: boolean
+  loadingLabel?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      loading = false,
+      loadingLabel = "Loading",
+      disabled,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button"
+    const isDisabled = disabled || loading
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        aria-busy={loading || undefined}
+        disabled={isDisabled}
         {...props}
-      />
+      >
+        <span className={cn("inline-flex items-center gap-2", loading && "opacity-0")}>
+          {children}
+        </span>
+        {loading ? (
+          <span className="pointer-events-none absolute inset-0 inline-flex items-center justify-center">
+            <span
+              aria-hidden="true"
+              className="h-4 w-4 shrink-0 rounded-full border-2 border-current border-t-transparent"
+              style={{ animation: "sg-spin 0.8s linear infinite" }}
+            />
+            <span className="sr-only">{loadingLabel}</span>
+          </span>
+        ) : null}
+      </Comp>
     )
   }
 )

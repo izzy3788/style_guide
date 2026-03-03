@@ -257,7 +257,7 @@ function FilterBarPreview() {
           </Button>
           <Button
             variant="primary"
-            disabled={isApplying}
+            loading={isApplying}
             onClick={async () => {
               setIsApplying(true);
               await new Promise((resolve) => window.setTimeout(resolve, 800));
@@ -265,7 +265,7 @@ function FilterBarPreview() {
               setDirty(false);
             }}
           >
-            {isApplying ? "적용 중..." : "적용"}
+            적용
           </Button>
         </div>
       </div>

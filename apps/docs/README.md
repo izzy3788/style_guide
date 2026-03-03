@@ -21,6 +21,16 @@ pnpm -C apps/docs dev -- --port 3001
 pnpm -C apps/docs dev -- --hostname 127.0.0.1 --port 3001
 ```
 
+## Build
+
+```bash
+# Default production build (webpack)
+pnpm -C apps/docs build
+
+# Optional Turbopack build
+pnpm -C apps/docs build:turbopack
+```
+
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.

@@ -112,16 +112,11 @@ const loadingCode = `import { Button } from "@/components/ui/button";
 export function ButtonLoading() {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <Button variant="primary" disabled>
-        <span
-          aria-hidden="true"
-          className="inline-block h-4 w-4 shrink-0 rounded-full border-2 border-current border-t-transparent"
-          style={{ animation: "sg-spin 0.8s linear infinite" }}
-        />
-        저장 중...
+      <Button variant="primary" loading>
+        저장
       </Button>
-      <Button variant="secondary" disabled>
-        불러오는 중...
+      <Button variant="secondary" loading>
+        불러오기
       </Button>
     </div>
   );
@@ -338,19 +333,13 @@ export default function ButtonDocsPage() {
             Loading
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Button variant="primary" disabled>
-              <span
-                aria-hidden="true"
-                className="inline-block h-4 w-4 shrink-0 rounded-full border-2 border-current border-t-transparent"
-                style={{ animation: "sg-spin 0.8s linear infinite" }}
-              />
-              저장 중...
-            </Button>
-            <Button variant="secondary" disabled>불러오는 중...</Button>
+            <Button variant="primary" loading>저장</Button>
+            <Button variant="secondary" loading>불러오기</Button>
           </div>
           <ul className="list-disc space-y-1 pl-5 text-body-sm text-muted-foreground">
-            <li>로딩 중에는 중복 요청 방지를 위해 `disabled`를 함께 사용합니다.</li>
-            <li>버튼 폭 점프를 막기 위해 기본 라벨 길이를 크게 바꾸지 않습니다.</li>
+            <li>`loading`을 사용하면 버튼이 자동으로 비활성화되어 중복 요청을 막습니다.</li>
+            <li>기본 라벨을 유지한 채 로딩 모션만 표시해 버튼 폭을 고정합니다.</li>
+            <li>로딩 텍스트가 더 길어지는 경우에도 라벨 치환 대신 스피너만 노출합니다.</li>
           </ul>
         </div>
         <CodeSnippet title="사용 예시" code={statesCode} copyable />

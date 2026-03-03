@@ -61,7 +61,7 @@ const formFlowSteps = [
   },
   {
     title: "3. 제출",
-    description: "저장 중 상태를 버튼 텍스트/disabled로 명확히 표시한다.",
+    description: "저장 버튼 라벨은 유지하고 loading 스피너로 진행 상태를 표시한다.",
   },
   {
     title: "4. 결과 피드백",
@@ -109,9 +109,7 @@ export function ReportFilterForm() {
       <div className="flex flex-wrap items-center justify-end gap-2">
         <Button variant="outline">취소</Button>
         <Button variant="secondary">초안 저장</Button>
-        <Button variant="primary" disabled={isSubmitting}>
-          {isSubmitting ? "저장 중..." : "저장"}
-        </Button>
+        <Button variant="primary" loading={isSubmitting}>저장</Button>
       </div>
     </form>
   );
@@ -239,7 +237,7 @@ function FormPatternPreview() {
           <Button variant="secondary">초안 저장</Button>
           <Button
             variant="primary"
-            disabled={isSubmitting}
+            loading={isSubmitting}
             onClick={async () => {
               if (!name.trim()) {
                 setShowError(true);
@@ -250,7 +248,7 @@ function FormPatternPreview() {
               setIsSubmitting(false);
             }}
           >
-            {isSubmitting ? "저장 중..." : "저장"}
+            저장
           </Button>
         </div>
       </div>
