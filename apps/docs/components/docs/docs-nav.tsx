@@ -79,27 +79,28 @@ const collapsedSectionIcons = {
 
 function CollapsedNav({ pathname }: { pathname: string }) {
   return (
-    <nav aria-label="문서 사이드 내비게이션" className="space-y-2">
+    <nav aria-label="문서 사이드 내비게이션" className="w-full space-y-2">
       {docsNav.map((section) => {
         const firstItem = section.items[0];
         const Icon = collapsedSectionIcons[section.title as keyof typeof collapsedSectionIcons] ?? LayoutGrid;
         const isActive = section.items.some((item) => pathname === item.href);
 
         return (
-          <SidebarMenu key={section.title} className="space-y-1">
-            <SidebarMenuItem>
-              <SidebarMenuButton isActive={isActive} asChild>
-                <Link
-                  href={firstItem.href}
-                  title={section.title}
-                  aria-label={section.title}
-                  className="flex justify-center"
-                >
-                  <Icon className="h-4 w-4" />
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
+          <div key={section.title} className="flex w-full justify-center">
+            <Link
+              href={firstItem.href}
+              title={section.title}
+              aria-label={section.title}
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-md transition-colors",
+                isActive
+                  ? "bg-muted text-foreground"
+                  : "text-foreground-80 hover:bg-muted-60 hover:text-foreground"
+              )}
+            >
+              <Icon className="h-4 w-4" />
+            </Link>
+          </div>
         );
       })}
     </nav>

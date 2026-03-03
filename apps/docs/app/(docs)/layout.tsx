@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import DocsSidebar from "@/components/docs/docs-sidebar";
+import DocsSidebar, {
+  DOCS_SIDEBAR_COLLAPSE_ENABLED,
+} from "@/components/docs/docs-sidebar";
 import { cn } from "@/lib/utils";
 
 export default function DocsLayout({
@@ -10,16 +12,21 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+  const isCollapsed = DOCS_SIDEBAR_COLLAPSE_ENABLED ? collapsed : false;
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
       <div className="flex w-full">
-        <DocsSidebar collapsed={collapsed} onToggle={() => setCollapsed((prev) => !prev)} />
+        <DocsSidebar
+          collapsed={isCollapsed}
+          onToggle={() => setCollapsed((prev) => !prev)}
+          enableCollapse={DOCS_SIDEBAR_COLLAPSE_ENABLED}
+        />
 
         <main
           className={cn(
             "flex min-h-screen min-w-0 flex-1 transition-[padding] duration-200",
-            collapsed ? "pl-[136px]" : "pl-[304px]"
+            isCollapsed ? "pl-[136px]" : "pl-[304px]"
           )}
         >
           <div className="mx-auto w-full max-w-[920px] px-8 py-10">
