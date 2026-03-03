@@ -122,6 +122,26 @@ export function ButtonLoading() {
   );
 }`;
 
+const loadingDoCode = `const [isSaving, setIsSaving] = useState(false);
+
+<Button
+  variant="primary"
+  loading={isSaving}
+  onClick={async () => {
+    setIsSaving(true);
+    await save();
+    setIsSaving(false);
+  }}
+>
+  저장
+</Button>`;
+
+const loadingDontCode = `const [isSaving, setIsSaving] = useState(false);
+
+<Button variant="primary" disabled={isSaving}>
+  {isSaving ? "저장 중..." : "저장"}
+</Button>`;
+
 const usageCode = `import { Button } from "@/components/ui/button";
 
 export function ButtonUsage() {
@@ -344,6 +364,63 @@ export default function ButtonDocsPage() {
         </div>
         <CodeSnippet title="사용 예시" code={statesCode} copyable />
         <CodeSnippet title="Loading 상태 예시" code={loadingCode} copyable />
+      </section>
+
+      <section className="not-prose space-y-6">
+        <h2 className="text-title-md text-[color:var(--gray-900)]">
+          Props/API
+        </h2>
+        <p className="text-body-sm text-muted-foreground">
+          `loading`과 `loadingLabel`을 통해 로딩 상태를 표현합니다. 로딩 시 라벨 텍스트는 유지하고 스피너만 오버레이됩니다.
+        </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Prop</TableHead>
+              <TableHead>Type</TableHead>
+              <TableHead>Default</TableHead>
+              <TableHead>Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="text-body-sm text-[color:var(--gray-900)]">
+                loading
+              </TableCell>
+              <TableCell>boolean</TableCell>
+              <TableCell>false</TableCell>
+              <TableCell>
+                true면 버튼이 자동 비활성화되고 스피너를 표시합니다. 버튼 폭은 유지됩니다.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="text-body-sm text-[color:var(--gray-900)]">
+                loadingLabel
+              </TableCell>
+              <TableCell>string</TableCell>
+              <TableCell>&quot;Loading&quot;</TableCell>
+              <TableCell>
+                스크린리더용 로딩 안내 문구입니다.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-3 rounded-xl border border-border bg-muted-30 p-4">
+            <div className="text-caption font-semibold uppercase tracking-wide text-[color:var(--gray-500)]">
+              Do (권장)
+            </div>
+            <Button variant="primary" loading>저장</Button>
+            <CodeSnippet title="권장 패턴" code={loadingDoCode} copyable />
+          </div>
+          <div className="space-y-3 rounded-xl border border-border bg-muted-30 p-4">
+            <div className="text-caption font-semibold uppercase tracking-wide text-[color:var(--gray-500)]">
+              Don&apos;t (금지)
+            </div>
+            <Button variant="primary" disabled>저장 중...</Button>
+            <CodeSnippet title="금지 패턴" code={loadingDontCode} copyable />
+          </div>
+        </div>
       </section>
 
       <section className="not-prose space-y-6">

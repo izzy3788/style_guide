@@ -11,6 +11,7 @@ const IGNORE_DIRS = new Set([".next", "node_modules"]);
 
 const CONDITIONAL_TEXT_PATTERN = /\{[\s\S]{0,300}?\?[\s\S]{0,80}?["'`][^"'`]*?(중\.{0,3}|loading)[^"'`]*?["'`][\s\S]{0,80}?:[\s\S]{0,120}?["'`][^"'`]*?["'`][\s\S]{0,120}?\}/i;
 const BUTTON_BLOCK_PATTERN = /<Button\b[\s\S]*?<\/Button>/g;
+const TEMPLATE_LITERAL_PATTERN = /`[\s\S]*?`/g;
 
 async function collectFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -48,7 +49,11 @@ async function main() {
 
   for (const filePath of files) {
     const source = await readFile(filePath, "utf8");
-    const matches = source.matchAll(BUTTON_BLOCK_PATTERN);
+    const sourceWithoutTemplateLiterals = source.replace(
+      TEMPLATE_LITERAL_PATTERN,
+      (literal) => "`" + " ".repeat(Math.max(0, literal.length - 2)) + "`"
+    );
+    const matches = sourceWithoutTemplateLiterals.matchAll(BUTTON_BLOCK_PATTERN);
 
     for (const match of matches) {
       const block = match[0];
