@@ -1,6 +1,17 @@
 import CodeSnippet from "../../_components/CodeSnippet";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import type { ReactNode } from "react";
 
 const fixedSidebarCode = `export function FixedSidebarLayout() {
@@ -70,6 +81,54 @@ const headerTabsCode = `export function HeaderWithSubnavLayout() {
       <main className="mx-auto max-w-6xl p-6">
         <section className="rounded-xl border border-border p-6">콘텐츠 영역</section>
       </main>
+    </div>
+  );
+}`;
+
+const appliedDemoCode = `export function OrdersAdminPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="grid min-h-screen grid-cols-[240px_1fr]">
+        <aside className="border-r border-border bg-[color:var(--gray-50)] p-4">
+          <div className="text-body-sm font-semibold">Style Guide Admin</div>
+        </aside>
+
+        <div className="min-w-0">
+          <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border bg-background/95 px-6 backdrop-blur">
+            <h1 className="text-title-sm">주문 관리</h1>
+            <Button size="sm">새 주문</Button>
+          </header>
+
+          <main className="space-y-4 p-6">
+            <div className="rounded-xl border border-border p-4">
+              <div className="grid gap-3 md:grid-cols-[1fr_auto_auto]">
+                <Input placeholder="주문번호/고객명 검색" />
+                <Button variant="outline">초기화</Button>
+                <Button>적용</Button>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>주문번호</TableHead>
+                    <TableHead>고객</TableHead>
+                    <TableHead>상태</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>#A-1204</TableCell>
+                    <TableCell>김지은</TableCell>
+                    <TableCell><Badge>결제 완료</Badge></TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
   );
 }`;
@@ -189,6 +248,70 @@ export default function LayoutPatternsPage() {
           }
           code={headerTabsCode}
         />
+      </section>
+
+      <section className="not-prose space-y-6">
+        <h2 className="text-title-md text-[color:var(--gray-900)]">실제 적용형 데모</h2>
+        <p className="text-body-sm text-muted-foreground">
+          사이드 메뉴 + 헤더 + 필터 + 테이블을 한 화면으로 조합한 예시입니다. 개발자가 바로 페이지에 붙여 사용할 수 있는 형태로 구성했습니다.
+        </p>
+        <div className="overflow-hidden rounded-xl border border-border bg-[color:var(--gray-00)]">
+          <div className="grid min-h-[420px] grid-cols-[200px_1fr]">
+            <aside className="border-r border-border bg-[color:var(--gray-50)] p-4">
+              <div className="mb-4 text-body-sm font-semibold text-[color:var(--gray-900)]">Style Guide Admin</div>
+              <div className="space-y-1 text-body-sm text-muted-foreground">
+                <div className="rounded-md bg-muted px-2 py-1 text-[color:var(--gray-900)]">주문 관리</div>
+                <div className="rounded-md px-2 py-1">고객 관리</div>
+                <div className="rounded-md px-2 py-1">정산</div>
+              </div>
+            </aside>
+            <div className="min-w-0">
+              <div className="flex h-14 items-center justify-between border-b border-border px-4">
+                <div>
+                  <div className="text-body-sm font-semibold text-[color:var(--gray-900)]">주문 관리</div>
+                  <div className="text-caption text-muted-foreground">사이드 메뉴 + 헤더 조합 실전 예시</div>
+                </div>
+                <Button size="sm">새 주문</Button>
+              </div>
+              <div className="space-y-4 p-4">
+                <div className="rounded-lg border border-border p-3">
+                  <div className="grid gap-2 md:grid-cols-[1fr_auto_auto]">
+                    <Input placeholder="주문번호/고객명 검색" />
+                    <Button variant="outline" size="sm">초기화</Button>
+                    <Button size="sm">적용</Button>
+                  </div>
+                </div>
+                <div className="overflow-hidden rounded-lg border border-border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>주문번호</TableHead>
+                        <TableHead>고객</TableHead>
+                        <TableHead>상태</TableHead>
+                        <TableHead>금액</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>#A-1204</TableCell>
+                        <TableCell>김지은</TableCell>
+                        <TableCell><Badge>결제 완료</Badge></TableCell>
+                        <TableCell>₩84,000</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>#A-1203</TableCell>
+                        <TableCell>박현우</TableCell>
+                        <TableCell><Badge>배송 준비</Badge></TableCell>
+                        <TableCell>₩32,000</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <CodeSnippet title="실제 적용형 기본 코드" code={appliedDemoCode} copyable />
       </section>
 
       <section className="not-prose space-y-6">
