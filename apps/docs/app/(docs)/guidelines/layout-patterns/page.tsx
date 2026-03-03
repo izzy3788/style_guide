@@ -108,7 +108,7 @@ const appliedDemoCode = `export function OrdersAdminPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-border">
+            <div className="overflow-hidden">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -266,12 +266,12 @@ export default function LayoutPatternsPage() {
               </div>
             </aside>
             <div className="min-w-0">
-              <div className="flex h-14 items-center justify-between border-b border-border px-4">
-                <div>
+              <div className="flex min-h-16 items-start justify-between border-b border-border px-4 py-3">
+                <div className="space-y-0.5">
                   <div className="text-body-sm font-semibold text-[color:var(--gray-900)]">주문 관리</div>
                   <div className="text-caption text-muted-foreground">사이드 메뉴 + 헤더 조합 실전 예시</div>
                 </div>
-                <Button size="sm">새 주문</Button>
+                <Button size="sm" className="self-center">새 주문</Button>
               </div>
               <div className="space-y-4 p-4">
                 <div className="rounded-lg border border-border p-3">
@@ -281,7 +281,7 @@ export default function LayoutPatternsPage() {
                     <Button size="sm">적용</Button>
                   </div>
                 </div>
-                <div className="overflow-hidden rounded-lg border border-border">
+                <div className="overflow-hidden">
                   <Table>
                     <TableHeader>
                       <TableRow>

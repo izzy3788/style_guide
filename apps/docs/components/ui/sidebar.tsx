@@ -58,6 +58,13 @@ export function SidebarContent({
   );
 }
 
+export function SidebarFooter({
+  className,
+  children,
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("border-t border-border p-3", className)}>{children}</div>;
+}
+
 export function SidebarGroup({
   className,
   children,

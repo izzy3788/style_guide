@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import { Blocks, ChevronDown, LayoutGrid, NotebookText } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -71,7 +71,42 @@ function NavSectionList({
   );
 }
 
-export default function DocsNav() {
+const collapsedSectionIcons = {
+  FOUNDATIONS: LayoutGrid,
+  COMPONENTS: Blocks,
+  GUIDELINES: NotebookText,
+} as const;
+
+function CollapsedNav({ pathname }: { pathname: string }) {
+  return (
+    <nav aria-label="문서 사이드 내비게이션" className="space-y-2">
+      {docsNav.map((section) => {
+        const firstItem = section.items[0];
+        const Icon = collapsedSectionIcons[section.title as keyof typeof collapsedSectionIcons] ?? LayoutGrid;
+        const isActive = section.items.some((item) => pathname === item.href);
+
+        return (
+          <SidebarMenu key={section.title} className="space-y-1">
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive={isActive} asChild>
+                <Link
+                  href={firstItem.href}
+                  title={section.title}
+                  aria-label={section.title}
+                  className="flex justify-center"
+                >
+                  <Icon className="h-4 w-4" />
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        );
+      })}
+    </nav>
+  );
+}
+
+export default function DocsNav({ collapsed = false }: { collapsed?: boolean }) {
   const pathname = usePathname();
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(() => {
     return docsNav.reduce<Record<string, boolean>>((acc, section, index) => {
@@ -80,6 +115,10 @@ export default function DocsNav() {
       return acc;
     }, {});
   });
+
+  if (collapsed) {
+    return <CollapsedNav pathname={pathname} />;
+  }
 
   return (
     <nav aria-label="문서 사이드 내비게이션" className="space-y-6">
