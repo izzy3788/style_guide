@@ -130,6 +130,26 @@ export function SheetContent({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open, setOpen]);
 
+  React.useEffect(() => {
+    if (!open || typeof window === "undefined") return;
+
+    const html = window.document.documentElement;
+    const body = window.document.body;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    const prevBodyTouchAction = body.style.touchAction;
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    body.style.touchAction = "none";
+
+    return () => {
+      html.style.overflow = prevHtmlOverflow;
+      body.style.overflow = prevBodyOverflow;
+      body.style.touchAction = prevBodyTouchAction;
+    };
+  }, [open]);
+
   if (!ctx || !open || !setOpen) return null;
 
   return (
