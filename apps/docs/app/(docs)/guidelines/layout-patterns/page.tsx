@@ -277,8 +277,8 @@ export default function LayoutPatternsPage() {
                 <div className="rounded-lg bg-[color:var(--gray-50)] p-3">
                   <div className="grid gap-2 md:grid-cols-[1fr_auto_auto]">
                     <Input placeholder="주문번호/고객명 검색" />
-                    <Button variant="outline" size="sm">초기화</Button>
-                    <Button size="sm">적용</Button>
+                    <Button variant="outline">초기화</Button>
+                    <Button>적용</Button>
                   </div>
                 </div>
                 <div className="overflow-hidden">
