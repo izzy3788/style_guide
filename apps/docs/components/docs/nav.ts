@@ -58,6 +58,7 @@ export const docsNav: NavSection[] = [
   {
     title: "GUIDELINES",
     items: [
+      { href: "/guidelines/layout-patterns", label: "레이아웃 구성" },
       { href: "/guidelines/data-screen-patterns", label: "데이터 화면 패턴" },
       { href: "/guidelines/content", label: "콘텐츠 가이드" },
       { href: "/guidelines/form-patterns", label: "폼 패턴" },
