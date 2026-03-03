@@ -107,7 +107,13 @@ function CollapsedNav({ pathname }: { pathname: string }) {
   );
 }
 
-export default function DocsNav({ collapsed = false }: { collapsed?: boolean }) {
+export default function DocsNav({
+  collapsed = false,
+  query = "",
+}: {
+  collapsed?: boolean;
+  query?: string;
+}) {
   const pathname = usePathname();
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(() => {
     return docsNav.reduce<Record<string, boolean>>((acc, section, index) => {
@@ -116,6 +122,19 @@ export default function DocsNav({ collapsed = false }: { collapsed?: boolean }) 
       return acc;
     }, {});
   });
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredNav = normalizedQuery
+    ? docsNav
+        .map((section) => ({
+          ...section,
+          items: section.items.filter(
+            (item) =>
+              item.label.toLowerCase().includes(normalizedQuery) ||
+              item.href.toLowerCase().includes(normalizedQuery)
+          ),
+        }))
+        .filter((section) => section.items.length > 0)
+    : docsNav;
 
   if (collapsed) {
     return <CollapsedNav pathname={pathname} />;
@@ -123,20 +142,30 @@ export default function DocsNav({ collapsed = false }: { collapsed?: boolean }) 
 
   return (
     <nav aria-label="문서 사이드 내비게이션" className="space-y-6">
-      {docsNav.map((section) => (
-        <NavSectionList
-          key={section.title}
-          section={section}
-          pathname={pathname}
-          open={openSections[section.title] ?? section.items.some((item) => item.href === pathname)}
-          onToggle={() =>
-            setOpenSections((prev) => ({
-              ...prev,
-              [section.title]: !prev[section.title],
-            }))
-          }
-        />
-      ))}
+      {filteredNav.length > 0 ? (
+        filteredNav.map((section) => (
+          <NavSectionList
+            key={section.title}
+            section={section}
+            pathname={pathname}
+            open={
+              normalizedQuery
+                ? true
+                : openSections[section.title] ?? section.items.some((item) => item.href === pathname)
+            }
+            onToggle={() =>
+              setOpenSections((prev) => ({
+                ...prev,
+                [section.title]: !prev[section.title],
+              }))
+            }
+          />
+        ))
+      ) : (
+        <div className="rounded-md border border-dashed border-border px-3 py-4 text-body-sm text-muted-foreground">
+          검색 결과가 없습니다.
+        </div>
+      )}
     </nav>
   );
 }

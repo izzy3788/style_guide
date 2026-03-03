@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import DocsNav from "./docs-nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
 import {
   Sidebar,
   SidebarContent,
@@ -24,6 +26,7 @@ export default function DocsSidebar({
   enableCollapse?: boolean;
 }) {
   const isCollapsed = enableCollapse ? collapsed : false;
+  const [query, setQuery] = useState("");
 
   return (
     <Sidebar
@@ -54,18 +57,30 @@ export default function DocsSidebar({
             className="rounded-md border border-border p-1.5 text-muted-foreground transition hover:bg-muted hover:text-foreground"
             onClick={onToggle}
           >
-            {isCollapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
+            {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
           </button>
         ) : null}
       </SidebarHeader>
+      {!isCollapsed ? (
+        <div className="px-4 pb-2">
+          <Input
+            aria-label="문서 검색"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            onClear={() => setQuery("")}
+            clearable
+            placeholder="컴포넌트/가이드 검색"
+          />
+        </div>
+      ) : null}
       <SidebarContent
         className={cn(
           isCollapsed
             ? "px-0 pb-4 pt-3 [scrollbar-gutter:auto]"
-            : "px-4 pb-4 pt-4 [scrollbar-gutter:auto]"
+            : "px-4 pb-4 pt-2 [scrollbar-gutter:auto]"
         )}
       >
-        <DocsNav collapsed={isCollapsed} />
+        <DocsNav collapsed={isCollapsed} query={query} />
       </SidebarContent>
       <SidebarFooter className={cn("bg-background", isCollapsed ? "px-2 py-3" : "px-3 py-3")}>
         <div className={cn("flex items-center gap-3 rounded-lg border border-border bg-[color:var(--gray-50)]", isCollapsed ? "justify-center p-2" : "px-3 py-2")}>

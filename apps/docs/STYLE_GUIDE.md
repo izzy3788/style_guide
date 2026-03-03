@@ -27,6 +27,11 @@ This file records the current docs layout decisions and styling rules so the tea
 - Inline gaps: `gap-2` (8px).
 - If in doubt, choose the closest value from the scale.
 
+## Border Layering Rule
+- Avoid `line-on-line` design (outlined container containing another outlined control with the same border weight/color).
+- If inner controls already use outlines (Input/Select/Table), outer wrapper should prefer subtle background (`bg-muted`, `bg-[color:var(--gray-50)]`) instead of another border.
+- Use a border only once per visual group. For grouped sections, use spacing + background tone first, then add a single boundary when needed.
+
 ## Sidebar Styling
 - Sidebar uses shadcn-style primitives (`components/ui/sidebar.tsx`).
 - Section titles are uppercase, muted.

@@ -274,7 +274,7 @@ export default function LayoutPatternsPage() {
                 <Button size="sm" className="self-center">새 주문</Button>
               </div>
               <div className="space-y-4 p-4">
-                <div className="rounded-lg border border-border p-3">
+                <div className="rounded-lg bg-[color:var(--gray-50)] p-3">
                   <div className="grid gap-2 md:grid-cols-[1fr_auto_auto]">
                     <Input placeholder="주문번호/고객명 검색" />
                     <Button variant="outline" size="sm">초기화</Button>
