@@ -29,6 +29,14 @@ const REQUIRED_RULES = [
   },
 ];
 
+const FORBIDDEN_RULES = [
+  {
+    label: "bordered wrapper directly around `<Table>`",
+    test: (source) =>
+      /<div[^>]*className=["'`][^"'`]*border[^"'`]*["'`][^>]*>\s*<Table\b/.test(source),
+  },
+];
+
 async function collectPageFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
@@ -59,11 +67,13 @@ async function main() {
     const relativePath = path.relative(process.cwd(), filePath);
 
     const missingRules = REQUIRED_RULES.filter((rule) => !rule.test(source));
+    const forbiddenRules = FORBIDDEN_RULES.filter((rule) => rule.test(source));
 
-    if (missingRules.length > 0) {
+    if (missingRules.length > 0 || forbiddenRules.length > 0) {
       failures.push({
         file: relativePath,
         missingRules: missingRules.map((rule) => rule.label),
+        forbiddenRules: forbiddenRules.map((rule) => rule.label),
       });
     }
   }
@@ -73,11 +83,14 @@ async function main() {
     return;
   }
 
-  console.error("Style guide check failed. Missing required patterns:\n");
+  console.error("Style guide check failed. Rule violations:\n");
   for (const failure of failures) {
     console.error(`- ${failure.file}`);
     for (const missingRule of failure.missingRules) {
       console.error(`  - ${missingRule}`);
+    }
+    for (const forbiddenRule of failure.forbiddenRules) {
+      console.error(`  - forbidden: ${forbiddenRule}`);
     }
   }
 

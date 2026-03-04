@@ -133,6 +133,38 @@ const appliedDemoCode = `export function OrdersAdminPage() {
   );
 }`;
 
+const navigationTypeCode = `type NavigationLayoutType =
+  | "admin-fixed"
+  | "admin-collapsible"
+  | "settings-tabs";
+
+const layoutByType = {
+  "admin-fixed": {
+    desktop: "고정 Sidebar + Sticky Header",
+    mobile: "좌측 Sheet + Hamburger",
+  },
+  "admin-collapsible": {
+    desktop: "접이식 Sidebar + Sticky Header",
+    mobile: "좌측 Sheet + Auto Close",
+  },
+  "settings-tabs": {
+    desktop: "Top Header + Sub Tabs",
+    mobile: "Top Header + Horizontal Tabs",
+  },
+} as const;
+
+export function AppShell({
+  type,
+  children,
+}: {
+  type: NavigationLayoutType;
+  children: React.ReactNode;
+}) {
+  if (type === "admin-fixed") return <FixedSidebarLayout>{children}</FixedSidebarLayout>;
+  if (type === "admin-collapsible") return <CollapsibleSidebarLayout>{children}</CollapsibleSidebarLayout>;
+  return <HeaderWithSubnavLayout>{children}</HeaderWithSubnavLayout>;
+}`;
+
 const checklist = [
   "헤더 높이와 사이드바 너비를 페이지마다 바꾸지 않는다.",
   "주요 액션은 헤더 우측 또는 콘텐츠 상단 중 한 위치로 고정한다.",
@@ -183,6 +215,46 @@ export default function LayoutPatternsPage() {
           <li>상단에서 검색/필터/주요 액션을 반복 제공해야 하는 화면</li>
           <li>데스크톱과 모바일에서 네비게이션 전략을 분리해야 하는 화면</li>
         </ul>
+      </section>
+
+      <section className="not-prose space-y-6">
+        <h2 className="text-title-md text-[color:var(--gray-900)]">타입별 조합 가이드</h2>
+        <p className="text-body-sm text-muted-foreground">
+          페이지 특성에 따라 아래 타입 중 하나를 선택해서 사이드메뉴/네비게이션을 일관되게 적용합니다.
+        </p>
+        <div className="overflow-hidden rounded-xl">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>타입</TableHead>
+                <TableHead>데스크톱</TableHead>
+                <TableHead>모바일</TableHead>
+                <TableHead>권장 화면</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium">admin-fixed</TableCell>
+                <TableCell>고정 Sidebar + Sticky Header</TableCell>
+                <TableCell>좌측 Sheet + Hamburger</TableCell>
+                <TableCell>주문/고객/정산 같은 운영형 목록 화면</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">admin-collapsible</TableCell>
+                <TableCell>접이식 Sidebar + Sticky Header</TableCell>
+                <TableCell>좌측 Sheet + 항목 선택 시 자동 닫힘</TableCell>
+                <TableCell>탐색 깊이가 깊고 메뉴 밀도가 높은 화면</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">settings-tabs</TableCell>
+                <TableCell>Top Header + Sub Tabs</TableCell>
+                <TableCell>Top Header + 가로 탭</TableCell>
+                <TableCell>설정/권한/정책 같은 상세 편집 화면</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+        <CodeSnippet title="타입 기반 App Shell 예시" code={navigationTypeCode} copyable />
       </section>
 
       <section className="not-prose space-y-6">

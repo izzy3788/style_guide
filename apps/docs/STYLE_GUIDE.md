@@ -31,6 +31,7 @@ This file records the current docs layout decisions and styling rules so the tea
 - Avoid `line-on-line` design (outlined container containing another outlined control with the same border weight/color).
 - If inner controls already use outlines (Input/Select/Table), outer wrapper should prefer subtle background (`bg-muted`, `bg-[color:var(--gray-50)]`) instead of another border.
 - Use a border only once per visual group. For grouped sections, use spacing + background tone first, then add a single boundary when needed.
+- For tables, do not wrap `<Table>` with an extra bordered `<div>` directly. This is lint-blocked by `scripts/check-style-guide.mjs`.
 
 ## Sidebar Styling
 - Sidebar uses shadcn-style primitives (`components/ui/sidebar.tsx`).
