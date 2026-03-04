@@ -186,9 +186,9 @@ export default function LayoutPatternsPage() {
       </section>
 
       <section className="not-prose space-y-6">
-        <h2 className="text-title-md text-[color:var(--gray-900)]">조합 A: 고정 사이드 메뉴 + 페이지 헤더</h2>
+        <h2 className="text-title-md text-[color:var(--gray-900)]">실제 적용형: Admin 기본 화면</h2>
         <PatternCard
-          title="Admin 기본형"
+          title="고정 사이드 메뉴 + 페이지 헤더"
           description="메뉴를 고정하고 헤더를 상단에 유지해, 화면 전환이 잦은 백오피스에서 탐색 비용을 줄입니다."
           preview={
             <div className="overflow-hidden rounded-xl border border-border bg-[color:var(--gray-00)]">
@@ -208,9 +208,9 @@ export default function LayoutPatternsPage() {
       </section>
 
       <section className="not-prose space-y-6">
-        <h2 className="text-title-md text-[color:var(--gray-900)]">조합 B: 접이식 사이드 메뉴 + 스티키 헤더</h2>
+        <h2 className="text-title-md text-[color:var(--gray-900)]">실제 적용형: Responsive 운영 화면</h2>
         <PatternCard
-          title="Responsive 운영형"
+          title="접이식 사이드 메뉴 + 스티키 헤더"
           description="데스크톱은 고정 사이드바, 모바일은 Drawer로 전환해 동일한 정보 구조를 유지합니다."
           preview={
             <div className="overflow-hidden rounded-xl border border-border bg-[color:var(--gray-00)]">
@@ -229,9 +229,9 @@ export default function LayoutPatternsPage() {
       </section>
 
       <section className="not-prose space-y-6">
-        <h2 className="text-title-md text-[color:var(--gray-900)]">조합 C: 상단 헤더 + 보조 내비 탭</h2>
+        <h2 className="text-title-md text-[color:var(--gray-900)]">실제 적용형: Settings 상세 화면</h2>
         <PatternCard
-          title="Settings 상세형"
+          title="상단 헤더 + 보조 내비 탭"
           description="사이드 메뉴 없이 헤더 아래 탭을 두어 세부 영역을 분리합니다. 팀 설정/조직 관리에 적합합니다."
           preview={
             <div className="overflow-hidden rounded-xl border border-border bg-[color:var(--gray-00)]">
