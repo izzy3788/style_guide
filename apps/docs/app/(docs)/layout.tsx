@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import DocsSidebar, {
   DOCS_SIDEBAR_COLLAPSE_ENABLED,
@@ -8,7 +8,7 @@ import DocsSidebar, {
 import DocsNav from "@/components/docs/docs-nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetClose, SheetContent } from "@/components/ui/sheet";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
 export default function DocsLayout({
@@ -53,17 +53,8 @@ export default function DocsLayout({
         <SheetContent side="left" desktopWidth={320} className="lg:hidden">
           <div className="flex h-full flex-col">
             <div className="border-b border-border">
-              <div className="flex h-[60px] items-center justify-between gap-2 px-4">
+              <div className="flex h-[60px] items-center px-4">
                 <div className="text-body-sm font-semibold text-foreground">Style Guide</div>
-                <SheetClose asChild>
-                  <button
-                    type="button"
-                    aria-label="메뉴 닫기"
-                    className="rounded-md border border-border p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </SheetClose>
               </div>
               <div className="px-4 pb-4">
                 <Input

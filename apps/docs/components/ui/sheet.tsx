@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type SheetContextValue = {
@@ -94,11 +95,15 @@ export function SheetClose({
 export function SheetContent({
   side = "left",
   desktopWidth = 260,
+  showCloseButton = true,
+  closeLabel = "닫기",
   className,
   children,
 }: {
   side?: "left" | "right";
   desktopWidth?: number;
+  showCloseButton?: boolean;
+  closeLabel?: string;
   className?: string;
   children: React.ReactNode;
 }) {
@@ -138,6 +143,16 @@ export function SheetContent({
     const prevHtmlOverflow = html.style.overflow;
     const prevBodyOverflow = body.style.overflow;
     const prevBodyTouchAction = body.style.touchAction;
+    const prevBodyPaddingRight = body.style.paddingRight;
+
+    const scrollbarWidth = window.innerWidth - html.clientWidth;
+    if (scrollbarWidth > 0) {
+      const computedPaddingRight = Number.parseFloat(
+        window.getComputedStyle(body).paddingRight
+      );
+      const basePaddingRight = Number.isNaN(computedPaddingRight) ? 0 : computedPaddingRight;
+      body.style.paddingRight = `${basePaddingRight + scrollbarWidth}px`;
+    }
 
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
@@ -147,6 +162,7 @@ export function SheetContent({
       html.style.overflow = prevHtmlOverflow;
       body.style.overflow = prevBodyOverflow;
       body.style.touchAction = prevBodyTouchAction;
+      body.style.paddingRight = prevBodyPaddingRight;
     };
   }, [open]);
 
@@ -170,6 +186,17 @@ export function SheetContent({
         )}
         style={{ width: useDesktopSide ? `${desktopWidth}px` : "100%" }}
       >
+        {showCloseButton ? (
+          <SheetClose asChild>
+            <button
+              type="button"
+              aria-label={closeLabel}
+              className="absolute right-3 top-3 z-10 rounded-md border border-border p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </SheetClose>
+        ) : null}
         {children}
       </div>
     </div>
